@@ -23,7 +23,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative min-h-screen pt-20 pb-0 flex flex-col items-center justify-start overflow-hidden font-instrument-serif"
+      className="relative min-h-screen pt-20 pb-0 flex flex-col items-center justify-start overflow-hidden"
       style={{ backgroundColor: bgColor }}
     >
       {/* Injection for the elegant Instrument Sans font */}
@@ -31,10 +31,23 @@ export default function HeroSection() {
         __html: `
                 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
                 .font-instrument-serif { font-family: 'Instrument Serif', serif; }
+                @keyframes marqueeScroll {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+                .animate-marquee {
+                    animation: marqueeScroll 18s linear infinite;
+                    width: max-content;
+                }
+                @media (min-width: 768px) {
+                    .animate-marquee {
+                        animation: marqueeScroll 35s linear infinite;
+                    }
+                }
             `}} />
 
       {/* --- Top Text Content --- */}
-      <div className="relative z-40 max-w-4xl mx-auto px-6 text-center flex flex-col justify-start mt-12 md:mt-20 mb-0">
+      <div className="relative z-40 max-w-4xl mx-auto px-6 text-center flex flex-col justify-start mt-32 md:mt-20 mb-0">
 
 
 
@@ -50,7 +63,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
             animate={{ opacity: 1, scale: 0.8, rotate: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="absolute -left-6 -top-4 md:-left-14 md:-top-4 opacity-80 pointer-events-none"
+            className="absolute -left-2 -top-12 md:-left-14 md:-top-4 opacity-80 pointer-events-none w-14 h-14 md:w-auto md:h-auto"
           >
             <svg width="70" height="70" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M40 10 Q40 40 10 40 Q40 40 40 70 Q40 40 70 40 Q40 40 40 10 Z" stroke="#2B124C" strokeWidth="2.5" fill="none" />
@@ -64,7 +77,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
             animate={{ opacity: 1, scale: 0.9, rotate: 10 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="absolute -right-6 top-8 md:-right-14 md:top-8 opacity-80 pointer-events-none"
+            className="absolute -right-4 -top-4 md:-right-14 md:top-8 opacity-80 pointer-events-none hidden md:block"
           >
             <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18 35 L26 8" stroke="#2B124C" strokeWidth="6" strokeLinecap="round" fill="none" />
@@ -79,7 +92,7 @@ export default function HeroSection() {
                 initial={{ opacity: 0, scale: 0.5, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
-                className="absolute -top-10 md:-top-12 left-1/2 -translate-x-1/2 w-14 h-14 pointer-events-none"
+                className="absolute -top-8 md:-top-12 left-1/2 -translate-x-1/2 w-10 h-10 md:w-14 md:h-14 pointer-events-none"
               >
                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M20 2L22 15L35 17L22 19L20 32L18 19L5 17L18 15L20 2Z" fill="#A87ED7" opacity="0.4" />
@@ -96,8 +109,9 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
+          className="font-sans"
         >
-          <p className="text-gray-500 text-[16px] md:text-[19px] leading-relaxed max-w-2xl mx-auto font-medium">
+          <p className="text-gray-500 text-[16px] md:text-[19px] leading-relaxed max-w-2xl mx-auto font-medium" style={{ fontFamily: "'Outfit', sans-serif" }}>
             Professional Coaching & Mentorship Backed <br />
             by Experts in Industry and Academia
           </p>
@@ -112,7 +126,7 @@ export default function HeroSection() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        className="relative w-full max-w-[100vw] h-[400px] md:h-[480px] lg:h-[560px] overflow-hidden flex-shrink-0 -mt-2 md:-mt-6 lg:-mt-10"
+        className="relative w-full max-w-[100vw] h-[380px] md:h-[480px] lg:h-[560px] overflow-hidden flex-shrink-0 mt-16 md:-mt-6 lg:-mt-10"
       >
         {/* Top Concave Mask */}
         <div
@@ -126,58 +140,33 @@ export default function HeroSection() {
           style={{ backgroundColor: bgColor }}
         />
 
-        <motion.div
-          className="flex h-full gap-3 md:gap-4 px-2"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            repeat: Infinity,
-            ease: "linear",
-            duration: 35 // scroll speed
-          }}
-        >
+        <div className="flex h-full gap-3 md:gap-4 px-2 animate-marquee">
           {marqueeImages.map((src, index) => (
             <div
               key={index}
-              className="relative h-full w-[200px] md:w-[260px] lg:w-[320px] flex-shrink-0"
+              className="relative h-full w-[180px] md:w-[260px] lg:w-[320px] flex-shrink-0 rounded-[32px] overflow-hidden"
               style={{
-                borderRadius: '32px',
-                overflow: 'hidden',
-                padding: '8px',
-                background: 'rgba(255, 255, 255, 0.55)',
-                backdropFilter: 'blur(20px)',
-                WebkitBackdropFilter: 'blur(20px)',
-                border: '1.5px solid rgba(255, 255, 255, 0.8)',
-                boxShadow: '0 4px 24px rgba(43, 18, 76, 0.1), 0 1px 3px rgba(0,0,0,0.06)',
+                boxShadow: '0 8px 30px rgba(43, 18, 76, 0.12)',
+                border: '1px solid rgba(43, 18, 76, 0.05)',
                 transform: 'translateZ(0)',
                 WebkitTransform: 'translateZ(0)',
               }}
             >
-              <div
+              <img
+                src={src}
+                alt={`Gallery image ${index + 1}`}
                 style={{
                   width: '100%',
                   height: '100%',
-                  borderRadius: '24px',
-                  overflow: 'hidden',
-                  transform: 'translateZ(0)',
-                  WebkitTransform: 'translateZ(0)',
-                  isolation: 'isolate',
+                  objectFit: 'cover',
+                  display: 'block',
+                  borderRadius: '32px',
                 }}
-              >
-                <img
-                  src={src}
-                  alt={`Gallery image ${index + 1}`}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    display: 'block',
-                  }}
-                  draggable="false"
-                />
-              </div>
+                draggable="false"
+              />
             </div>
           ))}
-        </motion.div>
+        </div>
       </motion.div>
 
     </section>

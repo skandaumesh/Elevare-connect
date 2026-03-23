@@ -40,8 +40,8 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className="flex flex-col min-h-screen antialiased"
-        style={{ background: "#FAFAFA" }}
+        className="flex flex-col min-h-screen antialiased overflow-x-hidden"
+        style={{ background: "#F9F8F3" }}
       >
         <Navbar />
         <main className="flex-grow">{children}</main>
