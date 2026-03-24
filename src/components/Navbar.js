@@ -8,9 +8,9 @@ import { motion, AnimatePresence } from "framer-motion";
 const NAV_LINKS = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
-  { name: "Services", href: "/services" },
+  { name: "Our Services", href: "/services" },
   { name: "Gallery", href: "/gallery" },
-  { name: "Collaborate", href: "/contact" },
+  { name: "Collaborate with Us", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -19,56 +19,46 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => setMenuOpen(false), [pathname]);
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none"
-        style={{ paddingTop: scrolled ? "12px" : "20px", transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}
+      <header
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 bg-white shadow-sm flex items-center ${scrolled ? "h-14 md:h-16" : "h-16 md:h-20"
+          }`}
       >
-        <nav
-          className="pointer-events-auto flex items-center justify-between transition-all duration-500 px-4 py-3 md:px-8 md:py-3"
-          style={{
-            width: "min(94vw, 1200px)",
-            borderRadius: "100px",
-            background: "rgba(249, 248, 243, 0.85)", // #F9F8F3 with opacity
-            backdropFilter: "blur(20px) saturate(180%)",
-            WebkitBackdropFilter: "blur(20px) saturate(180%)",
-            border: scrolled ? "1.5px solid rgba(43, 18, 76, 0.08)" : "1.5px solid rgba(43, 18, 76, 0.04)",
-            boxShadow: scrolled
-              ? "0 10px 30px -10px rgba(43, 18, 76, 0.1)"
-              : "0 4px 20px -5px rgba(0,0,0,0.02)",
-          }}
-        >
-          {/* Logo */}
-          <Link href="/" className="flex items-center no-underline shrink-0 group">
+        <div className="max-w-7xl mx-auto px-5 md:px-12 w-full flex items-center justify-between h-full overflow-visible">
+          {/* Logo - Pop-out Overflow Sizing */}
+          <Link href="/" className="flex items-center no-underline shrink-0 group relative z-10 overflow-visible">
             <img
-              src="/elevera.png"
-              alt="Elevare Connect"
-              className="h-[45px] md:h-[65px] w-auto object-contain transition-transform duration-500 group-hover:scale-105 my-[-8px] md:my-[-15px]"
-              style={{
-                mixBlendMode: "multiply",
-              }}
+              src="/elevare.png"
+              alt="Elevare Academy"
+              className={`transition-all duration-500 w-auto object-contain pointer-events-none drop-shadow-md
+                ${scrolled ? "h-20 md:h-24 translate-y-2" : "h-24 md:h-32 translate-y-3"}`}
             />
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-2">
+          {/* Nav Links - Desktop Only */}
+          <div className="hidden lg:flex items-center gap-8 xl:gap-10">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-5 py-2.5 text-[13px] font-bold tracking-widest uppercase no-underline transition-all duration-300 rounded-full
+                  className={`text-[14px] xl:text-[15px] font-bold transition-all duration-300 no-underline
                     ${isActive
-                      ? "text-[#2B124C] bg-[#A87ED7]/10"
-                      : "text-gray-500 hover:text-[#2B124C] hover:bg-[#A87ED7]/5"
+                      ? "text-[#0047AB]"
+                      : "text-slate-600 hover:text-[#0047AB]"
                     }`}
                 >
                   {link.name}
@@ -77,62 +67,58 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Action Buttons */}
-          <div className="hidden lg:flex items-center gap-3">
-            <Link
-              href="/contact"
-              className="px-6 py-2.5 rounded-full text-[13px] font-bold tracking-widest uppercase text-white no-underline
-                bg-gradient-to-r from-[#A87ED7] to-[#2B124C] hover:opacity-90 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ease-out"
-            >
-              Get Started
-            </Link>
-          </div>
-
-          {/* Mobile Toggle */}
+          {/* Mobile Toggle Button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden w-10 h-10 rounded-full bg-[#A87ED7]/10 flex items-center justify-center text-[#2B124C] cursor-pointer border-none hover:bg-[#A87ED7]/20 transition-colors"
+            className="lg:hidden w-12 h-12 flex items-center justify-center text-slate-800 cursor-pointer border-none bg-slate-50 hover:bg-slate-100 rounded-xl transition-colors"
+            aria-label="Toggle Menu"
           >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
-        </nav>
-      </div>
+        </div>
+      </header>
 
+      {/* Mobile Menu Overlay - Full Screen with Animations */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-[88px] left-0 right-0 z-[100] px-4"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "110%" }}
+            transition={{ type: "spring", damping: 30, stiffness: 200 }}
+            className="fixed inset-0 z-[150] bg-white flex flex-col p-8 pt-24"
           >
-            <div className="bg-[#F9F8F3]/95 backdrop-blur-3xl rounded-[32px] shadow-2xl border border-[#2B124C]/10 p-6 flex flex-col gap-1 max-w-[500px] mx-auto">
-              {NAV_LINKS.map((link) => {
+            <div className="flex flex-col gap-5">
+              {NAV_LINKS.map((link, idx) => {
                 const isActive = pathname === link.href;
                 return (
-                  <Link
+                  <motion.div
                     key={link.href}
-                    href={link.href}
-                    className={`px-6 py-4 rounded-2xl text-[14px] font-bold tracking-widest uppercase no-underline transition-all duration-200
-                      ${isActive
-                        ? "text-[#2B124C] bg-[#A87ED7]/10"
-                        : "text-gray-500 hover:text-[#2B124C] hover:bg-[#A87ED7]/5"
-                      }`}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + idx * 0.05 }}
                   >
-                    {link.name}
-                  </Link>
+                    <Link
+                      href={link.href}
+                      className={`text-[28px] md:text-[36px] font-black no-underline transition-colors block
+                        ${isActive ? "text-[#0047AB]" : "text-slate-400"}`}
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
                 );
               })}
-              <div className="mt-4 pt-4 border-t border-[#2B124C]/10">
-                <Link
-                  href="/contact"
-                  className="w-full flex items-center justify-center h-14 rounded-2xl text-[14px] font-bold tracking-widest uppercase text-white no-underline bg-gradient-to-r from-[#A87ED7] to-[#2B124C] hover:opacity-90 transition-opacity"
-                >
-                  Get Started
-                </Link>
-              </div>
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="mt-auto pt-10 border-t border-slate-100 space-y-4"
+            >
+              <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Empowering Futures</p>
+              <h3 className="text-[#0047AB] text-xl font-black">Elevare Academy</h3>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

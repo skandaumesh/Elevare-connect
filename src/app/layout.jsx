@@ -12,7 +12,7 @@ export const metadata = {
     "professional development",
     "campus to corporate",
     "soft skills training",
-    "elevare academy",
+    "elevare connect",
     "interview preparation",
     "placement training",
   ],
@@ -26,23 +26,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Instrument+Sans:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet" />
       </head>
-      <body
-        className="flex flex-col min-h-screen antialiased overflow-x-hidden"
-        style={{ background: "#F9F8F3" }}
-      >
+      <body className="flex flex-col min-h-screen antialiased overflow-x-hidden font-['DM_Sans'] bg-[#F9F8F3] text-[#52525B]">
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />

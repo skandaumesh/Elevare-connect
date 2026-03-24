@@ -1,154 +1,148 @@
 "use client";
-import { Mail, Linkedin, Instagram, Send, Facebook, Twitter, Sparkles } from "lucide-react";
-import { useReveal } from "@/components/Animations";
+import React from "react";
 import { motion } from "framer-motion";
 
+const LowPolyBackground = () => (
+    <div className="absolute inset-0 z-0 opacity-[0.8] pointer-events-none overflow-hidden bg-[#F1F5F9]">
+        <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="#CBD5E1" strokeWidth="0.5">
+                <path d="M0,0 L300,200 L100,400 L0,300 Z" fill="#F8FAFC" />
+                <path d="M300,200 L600,0 L800,300 L300,200 Z" fill="#FFFFFF" />
+                <path d="M600,0 L1000,0 L800,300 L600,0 Z" fill="#F1F5F9" />
+                <path d="M800,300 L1000,0 L1000,500 L800,300 Z" fill="#F8FAFC" />
+                <path d="M300,200 L800,300 L500,600 L300,200 Z" fill="#FBFDFF" />
+                <path d="M100,400 L300,200 L500,600 L100,400 Z" fill="#F1F5F9" />
+                <path d="M0,300 L100,400 L0,700 Z" fill="#FFFFFF" />
+                <path d="M100,400 L500,600 L300,800 L100,400 Z" fill="#F8FAFC" />
+                <path d="M500,600 L800,300 L1000,500 L500,600 Z" fill="#FFFFFF" />
+                <path d="M800,300 L1000,500 L1000,800 L800,300 Z" fill="#F1F5F9" />
+                <path d="M500,600 L1000,800 L700,1000 L500,600 Z" fill="#F8FAFC" />
+                <path d="M300,800 L500,600 L700,1000 L300,800 Z" fill="#FFFFFF" />
+                <path d="M100,400 L300,800 L0,1000 L0,700 Z" fill="#F1F5F9" />
+                <path d="M300,800 L700,1000 L0,1000 L300,800 Z" fill="#F8FAFC" />
+                <path d="M700,1000 L1000,800 L1000,1000 L700,1000 Z" fill="#FFFFFF" />
+            </g>
+        </svg>
+    </div>
+);
+
 export default function ContactPage() {
-    const addToRefs = useReveal();
-
-    const contactMethods = [
-        { icon: Mail, label: "Email", value: "info@elevareacademy.com", href: "mailto:info@elevareacademy.com" },
-        { icon: Linkedin, label: "LinkedIn", value: "Elevare Connect", href: "https://www.linkedin.com/in/elevare-academy-791889379/" },
-        { icon: Instagram, label: "Instagram", value: "@elevare05", href: "https://www.instagram.com/elevare05/" },
-    ];
-
     return (
-        <div className="relative bg-[#F9F8F3] min-h-screen overflow-hidden">
-            <style dangerouslySetInnerHTML={{
-                __html: `
-                    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
-                    .font-instrument-serif { font-family: 'Instrument Serif', serif; }
-                    .input-aesthetic {
-                        background: rgba(255,255,255,0.6);
-                        border: 1.5px solid rgba(43,18,76,0.06);
-                        border-radius: 16px;
-                        padding: 0 20px;
-                        color: #2B124C;
-                        font-weight: 500;
-                        transition: all 0.3s ease;
-                    }
-                    .input-aesthetic:focus {
-                        outline: none;
-                        border-color: rgba(168,126,215, 0.5);
-                        background: rgba(255,255,255,0.9);
-                        box-shadow: 0 4px 20px rgba(168,126,215,0.1);
-                    }
-                `}} />
+        <div className="relative min-h-screen pt-32 lg:pt-40 pb-20 overflow-hidden">
+            <LowPolyBackground />
 
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#A87ED7]/10 rounded-full blur-[140px] pointer-events-none" />
-
-            {/* Hero */}
-            <section className="relative text-center pt-40 pb-24 overflow-hidden">
-                <div className="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center">
-                    <div ref={addToRefs} className="space-y-10 reveal flex flex-col items-center">
-                        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#2B124C]/5 border border-[#2B124C]/10 text-[#2B124C] text-[11px] font-bold tracking-[0.3em] uppercase">
-                            CONTACT US
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                    {/* Left Column - Content */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="space-y-8 md:space-y-12"
+                    >
+                        <div className="space-y-6">
+                            <h1 className="text-[#0f172a] text-3xl md:text-5xl font-bold tracking-tight leading-[1.1] font-['Roboto',sans-serif]">
+                                Get in Touch With Us
+                            </h1>
+                            <p className="text-[#475569] text-lg md:text-xl font-medium leading-relaxed max-w-lg">
+                                Are you a Institute interested in empowering your students with communication, leadership, and workplace-ready skills? Fill the form and we&apos;ll be in touch!
+                            </p>
                         </div>
-                        <h1 className="font-instrument-serif text-[#2B124C]" style={{ fontSize: "clamp(48px, 7vw, 84px)", lineHeight: 1, letterSpacing: "-0.02em" }}>
-                            Collaborate <br className="hidden sm:block" />
-                            <span className="bg-gradient-to-r from-[#A87ED7] to-[#2B124C] bg-clip-text text-transparent">With Us.</span>
-                        </h1>
-                        <p className="text-gray-500 max-w-lg mx-auto font-medium" style={{ fontSize: "20px", lineHeight: 1.6 }}>
-                            Reach out to empower your students with professional excellence and world-class training.
-                        </p>
-                    </div>
-                </div>
-            </section>
 
-            {/* Main Content */}
-            <section className="px-6 py-24 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-32 items-start relative border-t border-[#2B124C]/5">
-                {/* Left: Contact Info */}
-                <div ref={addToRefs} className="reveal space-y-12">
-                    <div className="space-y-6">
-                        <h2 className="font-instrument-serif text-[#2B124C] tracking-wide" style={{ fontSize: "clamp(40px, 4.5vw, 64px)", lineHeight: 1.1 }}>Start a Conversation.</h2>
-                        <p className="text-gray-500 font-medium max-w-sm" style={{ fontSize: "18px", lineHeight: 1.65 }}>Whether you&apos;re an institution or individual seeking mentorship, we&apos;ll respond within 24 hours.</p>
-                    </div>
+                        <div className="space-y-2">
+                            <h3 className="text-[#0f172a] text-xl md:text-2xl font-bold font-['Roboto',sans-serif]">
+                                Email ID
+                            </h3>
+                            <a href="mailto:info@elevareacademy.com" className="text-[#0047AB] text-lg md:text-xl font-medium hover:underline break-all">
+                                info@elevareacademy.com
+                            </a>
+                        </div>
+                    </motion.div>
 
-                    <div className="grid gap-4">
-                        {contactMethods.map((item, idx) => {
-                            const Icon = item.icon; return (
-                                <div key={idx} className="flex items-center gap-6 p-6 group cursor-pointer border-[#2B124C]/5 hover:border-[#A87ED7]/20 shadow-sm transition-all duration-500 rounded-[24px]"
-                                    style={{
-                                        background: 'rgba(255, 255, 255, 0.6)',
-                                        backdropFilter: 'blur(16px)',
-                                        border: '1.5px solid rgba(255, 255, 255, 0.8)',
-                                    }}
-                                >
-                                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all bg-[#A87ED7]/10 text-[#A87ED7] group-hover:scale-110 group-hover:bg-[#A87ED7] group-hover:text-white"><Icon size={22} /></div>
-                                    <div>
-                                        <span className="font-bold text-[#A87ED7] block mb-1" style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase" }}>{item.label}</span>
-                                        <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-[17px] font-bold text-[#2B124C] no-underline transition-colors">{item.value}</a>
+                    {/* Right Column - Form */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="bg-white/80 backdrop-blur-xl rounded-[32px] md:rounded-[40px] p-6 md:p-12 shadow-[0_40px_100px_-20px_rgba(15,23,42,0.1)] border border-white/50"
+                    >
+                        <h2 className="text-[#0047AB] text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 font-['Roboto',sans-serif]">
+                            Fill Out the Form to Connect
+                        </h2>
+
+                        <form className="space-y-6 md:space-y-8" onSubmit={(e) => e.preventDefault()}>
+                            <div className="space-y-5 md:space-y-6">
+                                {/* Institute name */}
+                                <div className="border-b border-slate-300 pb-2">
+                                    <input
+                                        type="text"
+                                        placeholder="Institute name"
+                                        className="w-full bg-transparent border-none text-slate-800 focus:outline-none placeholder-slate-400 text-base md:text-lg"
+                                    />
+                                </div>
+
+                                {/* Person Name & Designation */}
+                                <div className="grid md:grid-cols-2 gap-5 md:gap-8">
+                                    <div className="border-b border-slate-300 pb-2">
+                                        <input
+                                            type="text"
+                                            placeholder="Person Name"
+                                            className="w-full bg-transparent border-none text-slate-800 focus:outline-none placeholder-slate-400 text-base md:text-lg"
+                                        />
+                                    </div>
+                                    <div className="border-b border-slate-300 pb-2">
+                                        <input
+                                            type="text"
+                                            placeholder="Designation"
+                                            className="w-full bg-transparent border-none text-slate-800 focus:outline-none placeholder-slate-400 text-base md:text-lg"
+                                        />
                                     </div>
                                 </div>
-                            );
-                        })}
-                    </div>
 
-                    <div className="space-y-5 pt-8 border-t border-[#2B124C]/5">
-                        <span className="font-bold text-[#A87ED7]" style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" }}>Follow the impact</span>
-                        <div className="flex gap-4">
-                            {[
-                                { icon: Facebook, href: "https://www.facebook.com/profile.php?id=61582428213379" },
-                                { icon: Linkedin, href: "https://www.linkedin.com/in/elevare-academy-791889379/" },
-                                { icon: Twitter, href: "https://x.com/ElevareA49358" },
-                                { icon: Instagram, href: "https://www.instagram.com/elevare05/" },
-                            ].map((s, i) => {
-                                const Icon = s.icon; return (
-                                    <a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
-                                        className="w-12 h-12 rounded-full flex items-center justify-center transition-all bg-white border border-[#2B124C]/10 text-[#A87ED7] hover:bg-[#A87ED7] hover:text-white hover:border-[#A87ED7] hover:-translate-y-1 shadow-sm hover:shadow-lg">
-                                        <Icon size={18} />
-                                    </a>
-                                );
-                            })}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Right: Form */}
-                <div ref={addToRefs} className="reveal delay-1">
-                    <form className="p-8 md:p-14 space-y-8 rounded-[40px] w-full max-w-[540px] mx-auto"
-                        style={{
-                            background: 'rgba(255, 255, 255, 0.7)',
-                            backdropFilter: 'blur(20px)',
-                            border: '1.5px solid rgba(255, 255, 255, 0.9)',
-                            boxShadow: '0 10px 40px rgba(43, 18, 76, 0.05)',
-                        }}
-                    >
-                        <div className="space-y-4">
-                            <h3 className="font-instrument-serif text-4xl text-[#2B124C] tracking-wide">Get in touch</h3>
-                            <p className="text-gray-500 font-medium" style={{ fontSize: "16px" }}>We&apos;ll get back with a roadmap for impact.</p>
-                        </div>
-                        <div className="grid gap-6">
-                            <div className="flex flex-col gap-2">
-                                <label className="font-bold text-[#2B124C] pl-1" style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase" }}>Institution</label>
-                                <input type="text" placeholder="Your organization" className="input-aesthetic h-14" />
-                            </div>
-                            <div className="grid md:grid-cols-2 gap-6">
-                                <div className="flex flex-col gap-2">
-                                    <label className="font-bold text-[#2B124C] pl-1" style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase" }}>Name</label>
-                                    <input type="text" placeholder="Your name" className="input-aesthetic h-14" />
+                                {/* Phone Number & Email ID */}
+                                <div className="grid md:grid-cols-2 gap-5 md:gap-8">
+                                    <div className="border-b border-slate-300 pb-2">
+                                        <input
+                                            type="text"
+                                            placeholder="Phone Number"
+                                            className="w-full bg-transparent border-none text-slate-800 focus:outline-none placeholder-slate-400 text-base md:text-lg"
+                                        />
+                                    </div>
+                                    <div className="border-b border-slate-300 pb-2">
+                                        <input
+                                            type="email"
+                                            placeholder="Email ID"
+                                            className="w-full bg-transparent border-none text-slate-800 focus:outline-none placeholder-slate-400 text-base md:text-lg"
+                                        />
+                                    </div>
                                 </div>
-                                <div className="flex flex-col gap-2">
-                                    <label className="font-bold text-[#2B124C] pl-1" style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase" }}>Phone</label>
-                                    <input type="tel" placeholder="+91 00000 00000" className="input-aesthetic h-14" />
+
+                                {/* Postal Address */}
+                                <div className="border-b border-slate-300 pb-2">
+                                    <input
+                                        type="text"
+                                        placeholder="Postal Address"
+                                        className="w-full bg-transparent border-none text-slate-800 focus:outline-none placeholder-slate-400 text-base md:text-lg"
+                                    />
+                                </div>
+
+                                {/* Message */}
+                                <div className="border-b border-slate-300 pb-2">
+                                    <textarea
+                                        placeholder="Type your message..."
+                                        rows="3"
+                                        className="w-full bg-transparent border-none text-slate-800 focus:outline-none placeholder-slate-400 text-base md:text-lg resize-none"
+                                    />
                                 </div>
                             </div>
-                            <div className="flex flex-col gap-2">
-                                <label className="font-bold text-[#2B124C] pl-1" style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase" }}>Email</label>
-                                <input type="email" placeholder="name@institution.com" className="input-aesthetic h-14" />
-                            </div>
-                            <div className="flex flex-col gap-2">
-                                <label className="font-bold text-[#2B124C] pl-1" style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase" }}>Message</label>
-                                <textarea rows="3" placeholder="How can we help?" className="input-aesthetic resize-none py-4" />
-                            </div>
-                        </div>
-                        <button type="submit" className="w-full text-white rounded-full font-bold h-16 flex items-center justify-center gap-3 transition-all bg-gradient-to-r from-[#A87ED7] to-[#2B124C] hover:opacity-90 hover:-translate-y-1 hover:shadow-lg active:scale-[0.98] text-[15px] tracking-widest uppercase border-none cursor-pointer mt-4">
-                            Send Message <Send size={20} />
-                        </button>
-                    </form>
+
+                            <button className="w-full py-4 md:py-5 bg-[#0047AB] text-white font-bold text-lg md:text-xl rounded-2xl hover:bg-blue-800 transition-all shadow-lg hover:shadow-blue-200">
+                                Send
+                            </button>
+                        </form>
+                    </motion.div>
                 </div>
-            </section>
-            <div className="h-24" />
+            </div>
         </div>
     );
 }
